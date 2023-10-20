@@ -12,17 +12,17 @@ function Home() {
     const [cityName, setCityName] = useState('Soalpur')
 
     const loadWeather = async () => {
-       try{
-         const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?units=metric&q=${query}&appid=${process.env.REACT_APP_API_KEY}`)
+        try {
+            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?units=metric&q=${query}&appid=${process.env.REACT_APP_API_KEY}`)
 
-        setWind(response.data.wind.speed)
-        setTemp(response.data.main.temp)
-        setCityName(response.data.name)
-        setMsg('Valid city name')
-       }
-       catch(error){
-        setMsg('Invalid city name')
-       }
+            setWind(response.data.wind.speed)
+            setTemp(response.data.main.temp)
+            setCityName(response.data.name)
+            setMsg('Valid city name')
+        }
+        catch (error) {
+            setMsg('Invalid city name')
+        }
     }
 
     useEffect(() => {
