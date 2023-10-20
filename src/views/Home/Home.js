@@ -8,14 +8,16 @@ function Home() {
     const [query, setQuery] = useState('solapur');
     const [temp, setTemp] = useState('50')
     const [windSpeed, setWind] = useState('4.5')
-    const [error, setMsg] = useState('')
+    const [error, setMsg] = useState('Valid city name')
+    const [cityName, setCityName] = useState('Soalpur')
 
     const loadWeather = async () => {
        try{
-         const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?units=metric&q=${query}&appid=67bdd4de274b6046a8d44ede3c99d981`)
+         const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?units=metric&q=${query}&appid=${process.env.REACT_APP_API_KEY}`)
 
         setWind(response.data.wind.speed)
         setTemp(response.data.main.temp)
+        setCityName(response.data.name)
         setMsg('Valid city name')
        }
        catch(error){
@@ -44,7 +46,7 @@ function Home() {
                 </div>
 
                 <p className='error-msg'>{error}</p>
-                <h1 className='city-name'>{query}</h1>
+                <h1 className='city-name'>{cityName}</h1>
                 <img src={weather} className='weather-img' alt='WeatherImg' />
                 <div className='display-container'>
                     <div>
